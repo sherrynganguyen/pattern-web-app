@@ -1,0 +1,9 @@
+.data-table > tr {
+  line-height:50px;
+}
+.number-box {
+  background-color: #253B70;
+  color: #ffffff;
+  padding: 10px!important;
+  margin: 2px;
+}

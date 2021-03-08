@@ -39,7 +39,7 @@ $(() => {
         for (let i = 0; i < finalArray.length; i++) {
           $temp.append(`<tr class="row-${i+1}" ></tr>`);
           for (let j = 0; j < finalArray[i].length; j++) {
-            $temp.find(`.row-${i+1}`).append(`<td> ${finalArray[i][j]}</td>`);
+            $temp.find(`.row-${i+1}`).append(`<td><span class="number-box"> ${finalArray[i][j]}</span></td>`);
           }
 
         }
