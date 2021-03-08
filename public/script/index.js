@@ -2,13 +2,11 @@
 const generatePattern = (data,finalPattern) => {
   //Generate a array of the full pattern
   const initArray = []; 
-  // data=1000;
   for (let i = 0; i < data; i++) {
     initArray.push(data-i);
   }
 
   //Generate a array of all rows of patterns
-  // finalPattern = [];
 
   for (let i = 1; i <= data; i++) {
     let tempArray = initArray.slice(0,i); //Generate temporary arrays of pattern to add the finall array 
@@ -46,7 +44,6 @@ $(() => {
           $('.list').append(`<p class="msg">Displaying ${data} rows</p>`);
         }
         let finalPattern = [];
-        data=1000;
         generatePattern(data, finalPattern)
         
         const $temp = $(template);
