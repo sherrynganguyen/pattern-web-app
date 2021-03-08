@@ -3,22 +3,28 @@ $(() => {
   //Table template to display the rows of pattern
 
   const template = `
-      <table class="data-table">
+    <table class="data-table">
 
-      </table>
-      `;
+    </table>
+    `;
   
   //Submit button to get a random number
 
   $('.submit').click(function() {
     $(".data-table").remove(); //remove previous data when click button
+    $(".msg").remove();
     let data;
     $.ajax({
       url: `https://foo-bar.azurewebsites.net/api/Numbers`,
       dataType: 'json',
       success: function (res) {
         data = res.naturalNumber;
-
+        if (data === 1) {
+          $('.list').append(`<p class="msg">Displaying ${data} row</p>`);
+        } else {
+          $('.list').append(`<p class="msg">Displaying ${data} rows</p>`);
+        }
+        
         //Generate a array of the full pattern
         const initArray = []; 
         for (let i = 0; i < data; i++) {
