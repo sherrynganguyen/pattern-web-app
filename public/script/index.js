@@ -29,11 +29,11 @@ $(() => {
 
   //Table template to display the rows of pattern
 
-  const template = `
-    <table class="data-table">
+  // const template = `
+  //   <table class="data-table">
 
-    </table>
-    `;
+  //   </table>
+  //   `;
   
   //Submit button to get a random number
 
@@ -46,17 +46,12 @@ $(() => {
       dataType: 'json',
       success: function (res) {
         data = res.naturalNumber;
-        if (data === 1) {
-          $('.list').append(`<p class="msg">Displaying ${data} row</p>`);
-        } else {
-          $('.list').append(`<p class="msg">Displaying ${data} rows</p>`);
-        }
+
+        data === 1 ? $('.list').append(`<p class="msg">Displaying ${data} row</p>`) : $('.list').append(`<p class="msg">Displaying ${data} rows</p>`);
+
+        let outputPattern = generatePattern(data);
         
-        let outputPattern = generatePattern(data)
-        
-        const $temp = $(template);
-        $temp.append(outputPattern);
-        $('.list').append($temp);
+        $('.list').append(`<table class="data-table"><tbody>${outputPattern}</tbody></table>`);
         
       }
     })
