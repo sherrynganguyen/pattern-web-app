@@ -1,18 +1,26 @@
 //Helper function to generate the final pattern array
-const generatePattern = (data,finalPattern) => {
+const generatePattern = (data) => {
   //Generate a array of the full pattern
   const initArray = []; 
   for (let i = 0; i < data; i++) {
     initArray.push(data-i);
   }
 
+  //Generate inline array
+
+  let initArrayStyled = [];
+  for (let i = 0; i < initArray.length; i++) {
+    initArrayStyled.push(`<span class="number-box">${initArray[i]}</span>`);
+  }
+
   //Generate a array of all rows of patterns
 
+  let finalPattern = [];
   for (let i = 1; i <= data; i++) {
-    let tempArray = initArray.slice(0,i); //Generate temporary arrays of pattern to add the finall array 
-    finalPattern.push(tempArray);
+    let tempArray = initArrayStyled.slice(0,i); //Generate temporary arrays of pattern to add the finall array 
+    finalPattern.push(`<tr><td>${tempArray.join(" ")}</td></tr>`);
   }
-  return
+  return finalPattern
 };
 
 
@@ -43,19 +51,13 @@ $(() => {
         } else {
           $('.list').append(`<p class="msg">Displaying ${data} rows</p>`);
         }
-        let finalPattern = [];
-        generatePattern(data, finalPattern)
+        
+        let outputPattern = generatePattern(data)
         
         const $temp = $(template);
-
-        for (let i = 0; i < finalPattern.length; i++) {
-          $temp.append(`<tr class="row-${i+1}" ></tr>`);
-          for (let j = 0; j < finalPattern[i].length; j++) {
-            $temp.find(`.row-${i+1}`).append(`<td><span class="number-box"> ${finalPattern[i][j]}</span></td>`);
-          }
-
-        }
+        $temp.append(outputPattern);
         $('.list').append($temp);
+        
       }
     })
 
