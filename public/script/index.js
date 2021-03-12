@@ -44,14 +44,21 @@ $(() => {
     $.ajax({
       url: `https://foo-bar.azurewebsites.net/api/Numbers`,
       dataType: 'json',
+      error: function (err) {
+        alert(err);
+      },
       success: function (res) {
         data = res.naturalNumber;
+        if (data > 999) {
+          alert('The number is too big. Please try again');
+        } else {
+          data === 1 ? $('.list').append(`<p class="msg">Displaying ${data} row</p>`) : $('.list').append(`<p class="msg">Displaying ${data} rows</p>`);
 
-        data === 1 ? $('.list').append(`<p class="msg">Displaying ${data} row</p>`) : $('.list').append(`<p class="msg">Displaying ${data} rows</p>`);
+          let outputPattern = generatePattern(data);
 
-        let outputPattern = generatePattern(data);
-
-        $('.list').append(`<table class="data-table"><tbody>${outputPattern.join(" ")}</tbody></table>`);
+          $('.list').append(`<table class="data-table"><tbody>${outputPattern.join(" ")}</tbody></table>`);
+        }
+        
       }
     })
 
